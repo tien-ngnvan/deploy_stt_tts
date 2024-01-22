@@ -1,0 +1,5 @@
+python-dotenv
+absl-py
+protobuf
+py7zr
+whisper-cpp-python

@@ -1,0 +1,7 @@
+services:
+ istral:
+  build: .
+  container_name: whispercpp
+  restart: unless-stopped
+  ports:
+   - 8585:8585
