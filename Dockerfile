@@ -18,6 +18,7 @@ RUN wget https://huggingface.co/distil-whisper/distil-medium.en/resolve/main/ggm
 
 RUN make
 RUN ./quantize models/ggml-medium-32-2.en.bin models/ggml-medium-32-2-q5_0.bin q5_0
+RUN rm -rf models/ggml-medium-32-2.en.bin
 RUN make server
 
 # Run app.py when the container launches ./server -m models/ggml-medium-32-2.en.bin
