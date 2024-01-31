@@ -33,4 +33,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cocabot.stt.tiny.v1
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cocabot.stt.base.v1
