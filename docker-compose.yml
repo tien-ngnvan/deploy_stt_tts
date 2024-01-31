@@ -1,7 +1,7 @@
 services:
- istral:
+ coca_stt:
   build: .
-  container_name: whispercpp
+  container_name: coca_stt
   restart: unless-stopped
   ports:
    - 8085:8085
