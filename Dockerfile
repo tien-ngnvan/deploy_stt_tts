@@ -14,7 +14,7 @@ WORKDIR whisper.cpp
 
 
 # download whisper.cpp setup
-RUN wget https://huggingface.co/distil-whisper/distil-small.en/resolve/main/ggml-medium-32-2.en.bin -P ./models
+RUN wget https://huggingface.co/distil-whisper/distil-medium.en/resolve/main/ggml-medium-32-2.en.bin -P ./models
 #RUN ./models/download-ggml-model.sh small.en
 
 # quantize
