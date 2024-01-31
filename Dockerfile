@@ -24,7 +24,7 @@ RUN rm -rf models/ggml-medium-32-2.en.bin
 RUN make server
 
 
+EXPOSE 8085
 # Run app.py when the container launches ./server -m models/ggml-medium-32-2.en.bin
 CMD ["./server", "-m", "./models/ggml-medium-32-2-q5_0.bin", "-p", "8", "--host", "0.0.0.0", "--port", "8085", "--convert"]
-EXPOSE 8085
 #CMD ["./server", "-m", "./models/ggml-small-q5_0.bin", "-p", "8", "--host", "0.0.0.0", "--port", "8085", "--convert"]
