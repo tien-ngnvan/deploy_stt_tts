@@ -12,14 +12,21 @@ RUN apt-get update \
 RUN git clone https://github.com/ggerganov/whisper.cpp.git
 WORKDIR whisper.cpp
 
-# download whisper.cpp setup
-RUN wget https://huggingface.co/distil-whisper/distil-medium.en/resolve/main/ggml-medium-32-2.en.bin -P ./models
-#RUN ./models/download-ggml-model.sh small.en
 
-# quantize
-# RUN make quantize
-# RUN ./quantize models/ggml-small.en.bin models/ggml-small-q5_0.bin q5_0
-# RUN rm -rf models/ggml-small.en.bin
+
+# openvino
+WORKDIR models
+RUN python -m venv openvino_conv_env
+RUN source openvino_conv_env/bin/activate
+RUN pip install -r requirements-openvino.txt
+
+# download whisper.cpp setup
+RUN python convert-whisper-to-openvino.py --model base.en
+RUN source /path/to/l_openvino_toolkit_ubuntu22_2023.0.0.10926.b4452d56304_x86_64/setupvars.sh
+
+# build project
+RUN cmake -B build -DWHISPER_OPENVINO=1
+RUN cmake --build build -j --config Release
 
 # serving
 RUN make server
@@ -27,5 +34,4 @@ RUN make server
 EXPOSE 8085
 
 # Run app.py when the container launches ./server -m models/ggml-medium-32-2.en.bin
-CMD ["./server", "-m", "./models/ggml-medium-32-2.en.bin", "-p", "2", "--host", "0.0.0.0", "--port", "8085", "--convert", "-debug", "-sow"]
-#CMD ["./server", "-m", "./models/ggml-small-q5_0.bin", "-p", "2", "--host", "0.0.0.0", "--port", "8085", "--convert", "-debug", "-sow"]
+CMD ["./server", "-m", "./models/ggml-base.en.bin", "-p", "2", "--host", "0.0.0.0", "--port", "8085", "--convert", "-debug", "-sow"]
