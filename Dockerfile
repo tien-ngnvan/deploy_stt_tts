@@ -18,7 +18,8 @@ RUN pip install -r requirements-openvino.txt
 
 # download whisper.cpp setup
 RUN python convert-whisper-to-openvino.py --model base.en
-RUN source /path/to/l_openvino_toolkit_ubuntu22_2023.0.0.10926.b4452d56304_x86_64/setupvars.sh
+ENV PATH="/ve/bin:$PATH"
+RUN . path/to/l_openvino_toolkit_ubuntu22_2023.0.0.10926.b4452d56304_x86_64/setupvars.sh
 
 # build project
 RUN cmake -B build -DWHISPER_OPENVINO=1
