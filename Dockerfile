@@ -12,12 +12,8 @@ RUN apt-get update \
 RUN git clone https://github.com/ggerganov/whisper.cpp.git
 WORKDIR whisper.cpp
 
-
-
 # openvino
 WORKDIR models
-RUN python -m venv openvino_conv_env
-RUN source openvino_conv_env/bin/activate
 RUN pip install -r requirements-openvino.txt
 
 # download whisper.cpp setup
